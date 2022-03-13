@@ -12,14 +12,25 @@ import org.springframework.stereotype.Component;
 @Component
 public class Config {
 
+    private static String secret = "moliang";
+
+    private static Long expiration = 86400L;
+
+    private static String tokenHead = "Authorization";
+
+    public static String getSecret() {
+        return secret;
+    }
+
+    public static Long getExpiration() {
+        return expiration;
+    }
+
+    public static String getTokenHead() {
+        return tokenHead;
+    }
+
     @Value("${live.jdbc.user}")
     private String liveUser;
-
-    @Value("${jwt.secret}")
-    private String secret;
-    @Value("${jwt.expiration}")
-    private Long expiration;
-    @Value("${jwt.tokenHead")
-    private String tokenHead;
 
 }
