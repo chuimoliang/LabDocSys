@@ -15,4 +15,11 @@ public class Config {
     @Value("${live.jdbc.user}")
     private String liveUser;
 
+    @Value("${jwt.secret}")
+    private String secret;
+    @Value("${jwt.expiration}")
+    private Long expiration;
+    @Value("${jwt.tokenHead")
+    private String tokenHead;
+
 }
