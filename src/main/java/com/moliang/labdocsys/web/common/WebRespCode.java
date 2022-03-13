@@ -9,7 +9,7 @@ public enum WebRespCode {
     SUCCESS(200, "响应成功"),
     PARAM_ERROR(10400, "参数错误，非法请求"),
     NOTFOUND(404, "请求数据不存在"),
-    NOT_LOGIN(401, "未登录"),
+    NOT_LOGIN(401, "未登录或权限不足"),
     BAD_REQUEST(500, "服务器内部错误"),
     FAIL(0, "请求失败");
 
