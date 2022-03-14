@@ -78,16 +78,31 @@ CREATE TABLE `mark` (
 2. 老师开设实验
     ```
     参数:
+   requestBody
    name String 实验名称
    comment String 实验要求
    endTime Date 截止时间
    返回
    创建成功
     ```
-3. 查看实验报告信息
+3. 查找实验
+   ```
+   参数:
+   open boolean 是否只查找未到截止日期的
+   createId String 创建人id
+   name String 实验题目 模糊查询
+   pageNum int 页码
+   pageSize int 页大小
+   返回:
+   dataPage
+   ```
+4. 查看实验报告信息
    ```
    根据实验分类, 老师可查看自己开设实验下的报告
    学生可查看自己提交的报告
+   name String 实验题目 模糊查询
+   pageNum int 页码
+   pageSize int 页大小
    ```
 5. 学生上传实验报告
    ```
@@ -97,6 +112,16 @@ CREATE TABLE `mark` (
     ```
     接口进行鉴权, 学生只能下载自己的实验报告, 
     老师可以下载自己开设的实验下的报告
+    时间关系未进行鉴权
     ```
 7. 实验报告批阅
+   ```
+   参数
+   id int 报告id
+   mark String 批阅内容
+   ```
 8. 学生查看批阅记录
+   ```  
+   参数
+   ids String 报告id 1,2,3,4,5
+   ```
