@@ -31,7 +31,7 @@ public class Experiment {
      * 创建人id
      */
     @TableField(value = "create_id")
-    private Integer createId;
+    private String createId;
 
     /**
      * 实验名称

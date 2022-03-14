@@ -20,7 +20,7 @@ CREATE TABLE `user_account` (
 ```sql
 CREATE TABLE `experiment` (
   `id` int NOT NULL AUTO_INCREMENT COMMENT '主键id',
-  `create_id` int NOT NULL COMMENT '创建人id',
+  `create_id` varchar(100) NOT NULL COMMENT '创建人id',
   `name` varchar(50) NOT NULL COMMENT '实验名称',
   `comment` text NOT NULL COMMENT '实验要求',
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
@@ -35,7 +35,7 @@ CREATE TABLE `experiment` (
 ```sql
 CREATE TABLE `report` (
   `id` int NOT NULL AUTO_INCREMENT COMMENT '主键id',
-  `create_id` int NOT NULL COMMENT '创建人id',
+  `create_id` varchar(100) NOT NULL COMMENT '创建人id',
   `experiment_id` int NOT NULL COMMENT '实验id',
   `name` varchar(50) NOT NULL COMMENT '报告名称',
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '上传时间',
@@ -53,7 +53,7 @@ CREATE TABLE `report` (
 CREATE TABLE `mark` (
   `id` int NOT NULL AUTO_INCREMENT COMMENT '主键id',
   `report_id` int NOT NULL COMMENT '报告id',
-  `teacher_id` int NOT NULL COMMENT '老师id',
+  `teacher_id` varchar(100) NOT NULL COMMENT '老师id',
   `mark` varchar(255) NOT NULL COMMENT '批阅内容',
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '批阅时间',
   `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
@@ -68,12 +68,21 @@ CREATE TABLE `mark` (
     ```
     登录后返回token及身份信息, 前端页面根据身份信息显示菜单
     访问后端接口携带token用于鉴权
+   参数:
+   userId String
+   password String
+   返回
+   token String
+   tokenHead String
     ```
 2. 老师开设实验
     ```
-    实验题目
-    实验报告上传截至日期
-    备注
+    参数:
+   name String 实验名称
+   comment String 实验要求
+   endTime Date 截止时间
+   返回
+   创建成功
     ```
 3. 查看实验报告信息
    ```
@@ -81,7 +90,9 @@ CREATE TABLE `mark` (
    学生可查看自己提交的报告
    ```
 5. 学生上传实验报告
-
+   ```
+   
+   ```
 6. 下载实验报告接口
     ```
     接口进行鉴权, 学生只能下载自己的实验报告, 

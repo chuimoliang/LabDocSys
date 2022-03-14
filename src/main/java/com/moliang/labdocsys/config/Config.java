@@ -18,6 +18,8 @@ public class Config {
 
     private static String tokenHead = "Authorization";
 
+    private static String docPath = "/doc/";
+
     public static String getSecret() {
         return secret;
     }

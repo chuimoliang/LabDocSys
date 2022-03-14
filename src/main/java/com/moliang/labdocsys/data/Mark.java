@@ -38,7 +38,7 @@ public class Mark {
      * 教师 id
      */
     @TableField(value = "teacher_id")
-    private Integer teacherId;
+    private String teacherId;
 
     /**
      * 批阅内容

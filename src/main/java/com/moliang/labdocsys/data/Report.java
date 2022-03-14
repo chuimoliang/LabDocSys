@@ -32,7 +32,7 @@ public class Report {
      * 创建人 id
      */
     @TableField(value = "create_id")
-    private Integer createId;
+    private String createId;
 
     /**
      * 实验 id
