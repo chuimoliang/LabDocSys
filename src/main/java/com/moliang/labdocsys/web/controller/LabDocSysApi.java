@@ -3,6 +3,7 @@ package com.moliang.labdocsys.web.controller;
 import com.moliang.labdocsys.aop.Teacher;
 import com.moliang.labdocsys.data.ExperimentForm;
 import com.moliang.labdocsys.service.ExperimentService;
+import com.moliang.labdocsys.service.MarkService;
 import com.moliang.labdocsys.service.ReportService;
 import com.moliang.labdocsys.util.WebUtil;
 import com.moliang.labdocsys.web.common.WebRespCode;
@@ -29,6 +30,9 @@ public class LabDocSysApi {
 
     @Resource
     private ReportService reportService;
+
+    @Resource
+    private MarkService markService;
 
     @PostMapping("experiment/save")
     @Teacher
@@ -93,6 +97,29 @@ public class LabDocSysApi {
     public WebResponse downloadReport(@RequestParam(value = "id") String ids,
                                       HttpServletResponse response) {
         return WebResponse.success(reportService.download(ids, response));
+    }
+
+    /**
+     * 批阅实验报告
+     */
+    @Teacher
+    @PostMapping("mark/create")
+    public WebResponse markReport(@RequestParam(value = "id") int id,
+                                  @RequestParam(value = "mark") String mark,
+                                  HttpServletRequest request) {
+        String userId = WebUtil.getUserId(request);
+        if (markService.createMark(id, mark, userId) > 0) {
+            return WebResponse.success();
+        }
+        return WebResponse.fail(WebRespCode.BAD_REQUEST);
+    }
+
+    /**
+     * 查看报告批阅
+     */
+    @GetMapping("mark/list")
+    public WebResponse markList(@RequestParam(value = "id") int id) {
+        return WebResponse.success(markService.list(id));
     }
 
 }

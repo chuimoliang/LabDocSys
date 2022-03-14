@@ -49,4 +49,16 @@ public class DataPage<T> {
         this.data = data;
     }
 
+    public DataPage(List<T> data, int num) {
+        this(data, num, num, 1, 1);
+    }
+
+    public DataPage(List<T> data, int pageSize, int total, int totalPage, int current) {
+        this.current = current;
+        this.pageSize = pageSize;
+        this.totalPage = totalPage;
+        this.total = total;
+        this.data = data;
+    }
+
 }

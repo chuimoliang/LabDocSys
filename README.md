@@ -54,7 +54,7 @@ CREATE TABLE `mark` (
   `id` int NOT NULL AUTO_INCREMENT COMMENT '主键id',
   `report_id` int NOT NULL COMMENT '报告id',
   `teacher_id` varchar(100) NOT NULL COMMENT '老师id',
-  `mark` varchar(255) NOT NULL COMMENT '批阅内容',
+  `content` varchar(255) NOT NULL COMMENT '批阅内容',
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '批阅时间',
   `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`),

@@ -43,8 +43,8 @@ public class Mark {
     /**
      * 批阅内容
      */
-    @TableField(value = "mark")
-    private String mark;
+    @TableField(value = "content")
+    private String content;
 
     /**
      * 创建时间
