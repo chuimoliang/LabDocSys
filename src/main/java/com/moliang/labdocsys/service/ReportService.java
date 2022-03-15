@@ -11,6 +11,7 @@ import com.moliang.labdocsys.util.FileUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
@@ -51,6 +52,26 @@ public class ReportService {
         queryWrapper.orderByDesc("create_time");
         IPage<Report> page = new Page<>(pageNum, pageSize);
         return new DataPage<>(reportMapper.selectPage(page, queryWrapper).getRecords(), page);
+    }
+
+    public int save(int id, MultipartFile file, String userId) {
+        File uuid = new File(Config.docPath, UUID.randomUUID() + "/" + file.getOriginalFilename());
+        if (!uuid.getParentFile().exists()) {
+            uuid.getParentFile().mkdirs();
+        }
+        try {
+            file.transferTo(uuid);
+        } catch (IOException e) {
+            log.error("保存文件出错", e);
+            return -1;
+        }
+        Report report = Report.builder().createId(userId)
+                .name(file.getName())
+                .experimentId(id)
+                .fileMeta(String.valueOf(file.getSize()))
+                .filePath(uuid.getPath())
+                .build();
+        return reportMapper.insert(report);
     }
 
     public String download(String ids, HttpServletResponse response) {

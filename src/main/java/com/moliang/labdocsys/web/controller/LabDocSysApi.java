@@ -11,6 +11,7 @@ import com.moliang.labdocsys.web.common.WebResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -88,6 +89,20 @@ public class LabDocSysApi {
         String userId = WebUtil.getUserId(request);
         log.info("userId:[{}]查找自己报告数据", userId);
         return WebResponse.success(reportService.listS(id, name, userId, pageNum, pageSize));
+    }
+
+    /**
+     * 提交报告
+     */
+    @PostMapping("report/submit")
+    public WebResponse submitReport(@RequestParam(value = "file") MultipartFile file,
+                                    @RequestParam(value = "id") int id,
+                                    HttpServletRequest request) {
+        String userId = WebUtil.getUserId(request);
+        if (reportService.save(id, file, userId) > 0) {
+            return WebResponse.success();
+        }
+        return WebResponse.fail(WebRespCode.BAD_REQUEST);
     }
 
     /**
