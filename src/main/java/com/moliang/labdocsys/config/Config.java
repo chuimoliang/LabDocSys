@@ -18,9 +18,9 @@ public class Config {
 
     private static String tokenHead = "Authorization";
 
-    public static String docPath = "/doc/";
+    public static String docPath = "D://doc/";
 
-    public static String tempPath = "/temp/";
+    public static String tempPath = "D://temp/";
 
     public static String getSecret() {
         return secret;
@@ -33,8 +33,5 @@ public class Config {
     public static String getTokenHead() {
         return tokenHead;
     }
-
-    @Value("${live.jdbc.user}")
-    private String liveUser;
 
 }

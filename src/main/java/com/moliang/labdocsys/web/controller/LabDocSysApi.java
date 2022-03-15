@@ -5,6 +5,7 @@ import com.moliang.labdocsys.data.ExperimentForm;
 import com.moliang.labdocsys.service.ExperimentService;
 import com.moliang.labdocsys.service.MarkService;
 import com.moliang.labdocsys.service.ReportService;
+import com.moliang.labdocsys.service.UserAccountService;
 import com.moliang.labdocsys.util.WebUtil;
 import com.moliang.labdocsys.web.common.WebRespCode;
 import com.moliang.labdocsys.web.common.WebResponse;
@@ -34,6 +35,15 @@ public class LabDocSysApi {
 
     @Resource
     private MarkService markService;
+
+    @Resource
+    private UserAccountService userAccountService;
+
+    @PostMapping("user/login")
+    public WebResponse login(@RequestParam(value = "userId")String userId,
+                             @RequestParam(value = "password")String password) {
+        return WebResponse.success(userAccountService.login(userId, password));
+    }
 
     @PostMapping("experiment/save")
     @Teacher

@@ -22,7 +22,7 @@ CREATE TABLE `experiment` (
   `id` int NOT NULL AUTO_INCREMENT COMMENT '主键id',
   `create_id` varchar(100) NOT NULL COMMENT '创建人id',
   `name` varchar(50) NOT NULL COMMENT '实验名称',
-  `comment` text NOT NULL COMMENT '实验要求',
+  `text` text NOT NULL COMMENT '实验要求',
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `end_time` datetime NOT NULL COMMENT '截至时间',
   `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
