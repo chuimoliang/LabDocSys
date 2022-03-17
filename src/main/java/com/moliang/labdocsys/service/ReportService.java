@@ -48,7 +48,9 @@ public class ReportService {
         if (name != null) {
             queryWrapper.like("name", name);
         }
-        queryWrapper.eq("create_id", userId);
+        if (userId != null) {
+            queryWrapper.eq("create_id", userId);
+        }
         queryWrapper.orderByDesc("create_time");
         IPage<Report> page = new Page<>(pageNum, pageSize);
         return new DataPage<>(reportMapper.selectPage(page, queryWrapper).getRecords(), page);
@@ -66,7 +68,7 @@ public class ReportService {
             return -1;
         }
         Report report = Report.builder().createId(userId)
-                .name(file.getName())
+                .name(file.getOriginalFilename())
                 .experimentId(id)
                 .fileMeta(String.valueOf(file.getSize()))
                 .filePath(uuid.getPath())

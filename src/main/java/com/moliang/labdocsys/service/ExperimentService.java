@@ -58,4 +58,8 @@ public class ExperimentService {
         return new DataPage<Experiment>(list, page);
     }
 
+    public Experiment get(int id) {
+        return experimentMapper.selectById(id);
+    }
+
 }
